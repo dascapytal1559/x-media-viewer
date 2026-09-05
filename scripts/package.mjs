@@ -11,6 +11,7 @@ const files = [
   'viewer.js',
   'README.md',
   'PRIVACY.md',
+  'LICENSE',
 ];
 const entries = {};
 for (const name of files) {

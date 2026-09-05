@@ -26,6 +26,7 @@ await build({
 await writeFile(path.join(output, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
 await copyFile(path.join(root, 'docs/INSTALL.md'), path.join(output, 'README.md'));
 await copyFile(path.join(root, 'PRIVACY.md'), path.join(output, 'PRIVACY.md'));
+await copyFile(path.join(root, 'LICENSE'), path.join(output, 'LICENSE'));
 // Remove the unused helper left by older releases. Each content script now
 // bundles the same source into its own execution world without shared globals.
 await rm(path.join(output, 'media-core.js'), { force: true });

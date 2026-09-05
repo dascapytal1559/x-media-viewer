@@ -66,4 +66,4 @@ npm run package  # Build and produce outputs/x-media-viewer.zip
 
 The viewer runs in Chrome’s isolated content-script world. A separate script in the page’s main world observes copies of X’s existing video responses. Both bundle one shared media helper source independently, so they need no shared global or load-order dependency. Only development tools use npm dependencies.
 
-See [privacy](PRIVACY.md) and [contributing](CONTRIBUTING.md). This repository currently has no public license grant; choose a license before a public release.
+See [privacy](PRIVACY.md) and [contributing](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE).

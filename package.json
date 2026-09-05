@@ -4,7 +4,7 @@
   "private": true,
   "description": "A keyboard-driven fullscreen media viewer for X timelines.",
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "engines": {
     "node": ">=22"
   },
