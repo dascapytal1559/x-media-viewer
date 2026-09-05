@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "X Media Viewer",
+  "version": "1.4.6",
+  "minimum_chrome_version": "111",
+  "description": "Browse X photos and videos fullscreen with up/down navigation, decoded images and buffered videos prepared ahead.",
+  "action": {
+    "default_title": "View this X timeline"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*", "https://www.x.com/*"],
+      "js": ["bridge.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://x.com/*", "https://www.x.com/*"],
+      "js": ["viewer.js"],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    }
+  ]
+}

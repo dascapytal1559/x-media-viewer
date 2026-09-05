@@ -1,0 +1,24 @@
+<section class="viewer" role="dialog" aria-modal="true" aria-label="X Media Viewer" tabindex="-1">
+  <header>
+    <span class="brand">X MEDIA VIEWER</span><span id="counter" class="count"></span
+    ><span id="buffer" class="count"></span><span class="spacer"></span
+    ><button id="mute" title="Toggle sound (E)">Unmute · E</button
+    ><button id="fullscreen" title="Fullscreen (F)">Fullscreen · F</button
+    ><button id="close" aria-label="Close viewer" title="Close viewer (X or Esc)">✕</button>
+  </header>
+  <main><div id="stage"></div></main>
+  <footer>
+    <div class="meta">
+      <span id="author"></span
+      ><a id="original" target="_blank" rel="noopener noreferrer" hidden>Open post ↗</a>
+      <p id="caption"></p>
+    </div>
+    <div class="controls">
+      <button id="retry" hidden>Retry media</button
+      ><span class="hint">↑ ↓ / W S · Z zen · X close</span
+      ><button id="previous" aria-label="Previous media">↑</button
+      ><button id="next" aria-label="Next media">↓</button>
+    </div>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+  </footer>
+</section>

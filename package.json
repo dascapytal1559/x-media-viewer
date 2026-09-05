@@ -1,0 +1,25 @@
+{
+  "name": "x-media-viewer",
+  "version": "1.4.6",
+  "private": true,
+  "description": "A keyboard-driven fullscreen media viewer for X timelines.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/viewer.test.cjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run format:check && npm test",
+    "package": "npm run build && node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "fflate": "0.8.3",
+    "jsdom": "26.1.0",
+    "prettier": "3.9.6"
+  }
+}
