@@ -192,11 +192,11 @@ test('up/down traverses every attachment across posts and restores X on close', 
   );
   const w = dom.window,
     root = w.document.querySelector('#x-media-viewer').shadowRoot;
-  assert.match(root.querySelector('#counter').textContent, /1 \/ 3 found/);
+  assert.match(root.querySelector('#counter').textContent, /1\/3/);
   assert.match(root.querySelector('#stage img').src, /image1-0.*name=orig/);
   await key(w, 'ArrowDown');
   assert.match(root.querySelector('#stage img').src, /image1-1/);
-  assert.match(root.querySelector('#counter').textContent, /2 \/ 3 found/);
+  assert.match(root.querySelector('#counter').textContent, /2\/3/);
   assert.equal(root.querySelector('#original').href, 'https://x.com/alice/status/1');
   await key(w, 'ArrowDown');
   assert.match(root.querySelector('#stage img').src, /image2-0/);
@@ -219,7 +219,7 @@ test('virtualized posts stay available and new posts append without duplicates',
   const root = w.document.querySelector('#x-media-viewer').shadowRoot;
   w.document.querySelector('#react-root').innerHTML = image('2') + image('3');
   await delay(180);
-  assert.match(root.querySelector('#counter').textContent, /1 \/ 3 found/);
+  assert.match(root.querySelector('#counter').textContent, /1\/3/);
   await key(w, 'ArrowDown');
   assert.match(root.querySelector('#stage img').src, /image2-0/);
   await key(w, 'ArrowUp');
@@ -228,7 +228,7 @@ test('virtualized posts stay available and new posts append without duplicates',
     .querySelector('#react-root')
     .append(w.document.querySelector('article').cloneNode(true));
   await delay(180);
-  assert.match(root.querySelector('#counter').textContent, /1 \/ 3 found/);
+  assert.match(root.querySelector('#counter').textContent, /1\/3/);
   dom.window.close();
 });
 test('a late video source replaces the preview with playable muted media', async () => {
@@ -286,7 +286,7 @@ test('next at the end scrolls X and advances to newly found media', async () => 
   await key(w, 'ArrowDown');
   await delay(950);
   const root = w.document.querySelector('#x-media-viewer').shadowRoot;
-  assert.match(root.querySelector('#counter').textContent, /2 \/ 2 found/);
+  assert.match(root.querySelector('#counter').textContent, /2\/2/);
   assert.match(root.querySelector('#stage img').src, /image2-0/);
   dom.window.close();
 });
@@ -298,7 +298,7 @@ test('going back cancels a pending next request', async () => {
   await key(w, 'ArrowUp');
   await delay(950);
   const root = w.document.querySelector('#x-media-viewer').shadowRoot;
-  assert.match(root.querySelector('#counter').textContent, /1 \/ 2 found/);
+  assert.match(root.querySelector('#counter').textContent, /1\/2/);
   assert.equal(root.querySelector('#next').disabled, false);
   dom.window.close();
 });
@@ -361,7 +361,7 @@ test('continuous X updates do not postpone media discovery indefinitely', async 
   try {
     await delay(250);
     const root = w.document.querySelector('#x-media-viewer').shadowRoot;
-    assert.match(root.querySelector('#counter').textContent, /1 \/ 1 found/);
+    assert.match(root.querySelector('#counter').textContent, /1\/1/);
   } finally {
     clearInterval(updates);
     dom.window.close();
@@ -442,7 +442,7 @@ test('automatically buffers ten media items ahead without changing the displayed
   try {
     const root = dom.window.document.querySelector('#x-media-viewer').shadowRoot;
     const displayed = root.querySelector('#stage img');
-    await until(() => root.querySelector('#counter').textContent === '1 / 11 found');
+    await until(() => root.querySelector('#counter').textContent === '1/11');
     await delay(70);
     assert.equal(scrolls, 10);
     assert.equal(root.querySelector('#stage img'), displayed);
@@ -472,7 +472,7 @@ test('refills only after navigating below ten remaining items', async () => {
     await delay(50);
     assert.equal(scrolls, 0);
     await key(w, 'ArrowDown');
-    await until(() => root.querySelector('#counter').textContent === '2 / 12 found');
+    await until(() => root.querySelector('#counter').textContent === '2/12');
     await delay(70);
     assert.equal(scrolls, 1);
     assert.match(root.querySelector('#stage img').src, /image2-0/);
@@ -502,7 +502,7 @@ test('a next request joins background loading and advances only once', async () 
     await key(w, 'ArrowDown');
     assert.equal(scrolls, 1);
     supply = true;
-    await until(() => root.querySelector('#counter').textContent === '2 / 12 found');
+    await until(() => root.querySelector('#counter').textContent === '2/12');
     await delay(70);
     assert.match(root.querySelector('#stage img').src, /image2-0/);
     assert.equal(root.querySelector('#next').disabled, false);
@@ -545,7 +545,7 @@ test('a text-only starting viewport automatically searches for media', async () 
   });
   try {
     const root = dom.window.document.querySelector('#x-media-viewer').shadowRoot;
-    await until(() => root.querySelector('#counter').textContent === '1 / 11 found');
+    await until(() => root.querySelector('#counter').textContent === '1/11');
     assert.match(root.querySelector('#stage img').src, /image1-0/);
   } finally {
     dom.window.close();
@@ -559,7 +559,7 @@ test('mixed photos and video in one post follow the same up/down sequence', asyn
     w = dom.window;
   try {
     const root = w.document.querySelector('#x-media-viewer').shadowRoot;
-    assert.equal(root.querySelector('#counter').textContent, '1 / 4 found');
+    assert.equal(root.querySelector('#counter').textContent, '1/4');
     await key(w, 'ArrowDown');
     assert.equal(root.querySelector('#stage video').src, 'https://video.twimg.com/a/high.mp4');
     assert.equal(root.querySelector('#original').href, 'https://x.com/alice/status/1');
@@ -585,7 +585,7 @@ test('late attachments are inserted in post order without changing the displayed
     await key(w, 'ArrowDown');
     const displayed = root.querySelector('#stage img');
     w.document.querySelector('article').outerHTML = image('1', 3);
-    await until(() => root.querySelector('#counter').textContent === '4 / 4 found');
+    await until(() => root.querySelector('#counter').textContent === '4/4');
     assert.equal(root.querySelector('#stage img'), displayed);
     assert.equal(root.querySelector('#original').href, 'https://x.com/alice/status/2');
     await key(w, 'ArrowUp');
@@ -611,10 +611,10 @@ test('the ten-item buffer counts attachments instead of posts', async () => {
     const w = dom.window,
       root = w.document.querySelector('#x-media-viewer').shadowRoot;
     await delay(50);
-    assert.equal(root.querySelector('#counter').textContent, '1 / 11 found');
+    assert.equal(root.querySelector('#counter').textContent, '1/11');
     assert.equal(scrolls, 0);
     await key(w, 'ArrowDown');
-    await until(() => root.querySelector('#counter').textContent === '2 / 12 found');
+    await until(() => root.querySelector('#counter').textContent === '2/12');
     await delay(70);
     assert.equal(scrolls, 1);
     assert.match(root.querySelector('#stage img').src, /image1-1/);
@@ -634,12 +634,11 @@ test('a discovered image is not ready until decoded and cannot blank the current
     const root = w.document.querySelector('#x-media-viewer').shadowRoot;
     const first = w.testMedia.images.find((img) => img.src.includes('image1-0'));
     const second = w.testMedia.images.find((img) => img.src.includes('image2-0'));
-    assert.equal(root.querySelector('#counter').textContent, '0 / 2 found');
-    assert.equal(root.querySelector('#buffer').textContent, '0 / 10 ready ahead');
+    assert.equal(root.querySelector('#counter').textContent, '0/2');
     await decoded(w, first);
     await key(w, 'ArrowDown');
     assert.equal(root.querySelector('#stage img'), first);
-    assert.equal(root.querySelector('#counter').textContent, '1 / 2 found');
+    assert.equal(root.querySelector('#counter').textContent, '1/2');
     w.testMedia.loadImage(second);
     await delay(0);
     assert.equal(
@@ -650,7 +649,7 @@ test('a discovered image is not ready until decoded and cannot blank the current
     w.testMedia.decodeImage(second);
     await delay(0);
     assert.equal(root.querySelector('#stage img'), second);
-    assert.equal(root.querySelector('#counter').textContent, '2 / 2 found');
+    assert.equal(root.querySelector('#counter').textContent, '2/2');
     const requests = w.testMedia.images.length;
     await key(w, 'ArrowUp');
     assert.equal(root.querySelector('#stage img'), first);
@@ -665,12 +664,11 @@ test('a discovered image is not ready until decoded and cannot blank the current
     w.close();
   }
 });
-test('the ready-ahead counter reflects ten decoded assets, not ten discovered URLs', async () => {
+test('ten prepared images can be traversed without starting another download', async () => {
   const dom = await setup(image('1', 11), true, { manualImages: true }),
     w = dom.window;
   try {
     const root = w.document.querySelector('#x-media-viewer').shadowRoot;
-    assert.equal(root.querySelector('#buffer').textContent, '0 / 10 ready ahead');
     assert.equal(w.testMedia.images.length, 3, 'Preload concurrency is bounded');
     for (let n = 0; n < 11; n++) {
       const match = `/image1-${n}?`;
@@ -680,11 +678,15 @@ test('the ready-ahead counter reflects ten decoded assets, not ten discovered UR
         w.testMedia.images.find((img) => img.src.includes(match)),
       );
     }
-    assert.equal(root.querySelector('#buffer').textContent, '10 / 10 ready ahead');
-    const next = w.testMedia.images.find((img) => img.src.includes('/image1-1?'));
-    await key(w, 'ArrowDown');
-    assert.equal(root.querySelector('#stage img'), next);
-    assert.equal(root.querySelector('#buffer').textContent, '9 / 10 ready ahead');
+    assert.equal(root.querySelector('#counter').textContent, '1/11');
+    assert.equal(root.querySelector('#buffer'), null);
+    for (let n = 1; n < 11; n++) {
+      const next = w.testMedia.images.find((img) => img.src.includes(`/image1-${n}?`));
+      await key(w, 'ArrowDown');
+      assert.equal(root.querySelector('#stage img'), next);
+      assert.equal(root.querySelector('#counter').textContent, `${n + 1}/11`);
+    }
+    assert.equal(w.testMedia.images.length, 11);
   } finally {
     w.close();
   }
@@ -881,27 +883,27 @@ test('X opens and closes repeatedly, while W/S and left/right traverse flattened
     await key(w, 'X');
     const root = w.document.querySelector('#x-media-viewer').shadowRoot;
     await key(w, 's');
-    assert.equal(root.querySelector('#counter').textContent, '2 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '2/3');
     await key(w, 'S');
-    assert.equal(root.querySelector('#counter').textContent, '3 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '3/3');
     await key(w, 'W');
-    assert.equal(root.querySelector('#counter').textContent, '2 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '2/3');
     await key(w, 'w');
-    assert.equal(root.querySelector('#counter').textContent, '1 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '1/3');
     await key(w, 'ArrowRight');
-    assert.equal(root.querySelector('#counter').textContent, '2 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '2/3');
     await key(w, 'ArrowRight');
-    assert.equal(root.querySelector('#counter').textContent, '3 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '3/3');
     await key(w, 'ArrowLeft');
-    assert.equal(root.querySelector('#counter').textContent, '2 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '2/3');
     await key(w, 'a');
-    assert.equal(root.querySelector('#counter').textContent, '1 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '1/3');
     await key(w, 'd');
-    assert.equal(root.querySelector('#counter').textContent, '2 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '2/3');
     await key(w, 'D');
-    assert.equal(root.querySelector('#counter').textContent, '3 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '3/3');
     await key(w, 'A');
-    assert.equal(root.querySelector('#counter').textContent, '2 / 3 found');
+    assert.equal(root.querySelector('#counter').textContent, '2/3');
     w.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'x', repeat: true, cancelable: true }));
     assert.ok(w.document.querySelector('#x-media-viewer'));
     await key(w, 'x');

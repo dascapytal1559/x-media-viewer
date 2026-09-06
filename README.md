@@ -42,7 +42,7 @@ Shortcuts ignore text fields, text composition, and Ctrl/Command/Alt combination
 
 ## Loading and limitations
 
-**Found** counts discovered media, not downloaded media or the total on X. **Ready ahead** counts up to ten consecutive prepared attachments after the displayed item. Photos are decoded before display. Videos require available frames, a decoded poster, and three seconds buffered, or the remaining duration for short clips. A ready video can still rebuffer later on a slow connection.
+The compact counter, such as **1/12**, shows the displayed item and how many media items have been discovered. The total is not the number downloaded or the total on X. Photos are decoded before display. Videos require available frames, a decoded poster, and three seconds buffered, or the remaining duration for short clips. A ready video can still rebuffer later on a slow connection.
 
 The viewer prepares three media downloads at a time, prioritizes the selected item, and retains ten ahead and two behind. It scrolls X underneath to discover more posts. If discovery stalls, press next at the end to retry. Unavailable media can be skipped. External embeds and live streams without an MP4 source are unsupported.
 

@@ -10,7 +10,7 @@ Use a normal X session and a timeline containing images, video, and multiple att
 
 1. Open with the extension icon and with X. Confirm it starts near the visible post and does not navigate to a different page.
 2. Try arrows, W/S, A/D, and K/J across attachments and posts. Verify they do nothing while typing into X’s search or post fields.
-3. Wait for the ready-ahead count, then move forward and back. Check first-time transitions for black flashes. Move quickly while preparation is incomplete: the current media should stay visible until the selected item is ready.
+3. Allow media to preload, then move forward and back. Check that the compact counter tracks the displayed item. Check first-time transitions for black flashes. Move quickly while preparation is incomplete: the current media should stay visible until the selected item is ready.
 4. Check M and E for sound and Space for playback. Confirm video playback starts and the poster disappears after a frame becomes available.
 5. Toggle Z on an image and a video. Confirm only media remains, keyboard navigation works, and Z restores the interface. Test F separately.
 6. Close using X, Esc, the close button, and the extension icon. Check that the timeline returns to the displayed post, including after loading well ahead.

@@ -153,23 +153,9 @@ function scan() {
 function say(text) {
   if (status) status.textContent = text;
 }
-function readyAhead() {
-  const shownIndex = shown ? items.findIndex((item) => item.id === shown.id) : index;
-  let count = 0;
-  for (let n = shownIndex + 1; n < items.length && count < min_loaded_left; n++) {
-    const record = prepared.get(items[n].id);
-    if (record?.state !== 'ready' || (record.node.tagName === 'VIDEO' && !videoReady(record.node)))
-      break;
-    count++;
-  }
-  return count;
-}
 function updateControls() {
   const shownIndex = shown ? items.findIndex((item) => item.id === shown.id) : -1;
-  counter.textContent = items.length
-    ? `${shownIndex + 1} / ${items.length} found`
-    : 'Waiting for X';
-  shadow.querySelector('#buffer').textContent = `${readyAhead()} / ${min_loaded_left} ready ahead`;
+  counter.textContent = `${shownIndex + 1}/${items.length}`;
   previous.disabled = !items[index] || index === 0;
   next.disabled = waitingForNext && index >= items.length - 1;
 }

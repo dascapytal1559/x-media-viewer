@@ -107,9 +107,6 @@ main {
 .count {
   white-space: nowrap;
 }
-#buffer {
-  font-size: 11px;
-}
 footer {
   padding: 16px 0 19px;
   display: grid;
@@ -199,9 +196,6 @@ a:hover {
   }
   #mute {
     display: none;
-  }
-  #buffer {
-    font-size: 9px;
   }
   footer {
     column-gap: 10px;

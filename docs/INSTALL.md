@@ -24,7 +24,7 @@ The viewer opens in the current tab near the post you are viewing. Closing retur
 
 Text entry and modified keyboard shortcuts are left alone. Every attachment is a separate step. Videos loop and initially play muted. In zen mode, keyboard shortcuts remain available, including Z to restore controls.
 
-The header distinguishes discovered media from media ready ahead. If the next item is still preparing, the current visual stays visible. Video readiness means an opening playback buffer, not the entire video downloaded.
+The header shows a compact position such as **1/12**: the displayed item out of the media discovered so far. If the next item is still preparing, the current visual stays visible. Video readiness means an opening playback buffer, not the entire video downloaded.
 
 ## Update
 
