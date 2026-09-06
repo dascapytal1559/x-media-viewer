@@ -1,19 +1,24 @@
 <section class="viewer" role="dialog" aria-modal="true" aria-label="X Media Viewer" tabindex="-1">
   <header>
-    <span class="brand">X MEDIA VIEWER</span><span id="counter" class="count"></span
-    ><span class="spacer"></span
-    ><button
-      id="zen"
-      title="Zen mode (Z); press Z again to restore controls"
-      aria-keyshortcuts="z"
-      aria-pressed="false"
-    >
-      <span class="hotkey">Z</span>en</button
-    ><button id="mute" title="Toggle sound (M or E)" aria-keyshortcuts="m e">
-      Un<span class="hotkey">m</span>ut<span class="hotkey">e</span></button
-    ><button id="fullscreen" title="Fullscreen (F)" aria-keyshortcuts="f">
-      <span class="hotkey">F</span>ullscreen</button
-    ><button id="close" aria-label="Close viewer" title="Close viewer (X or Esc)">✕</button>
+    <div class="identity">
+      <span class="brand">X MEDIA VIEWER</span><span id="counter" class="count"></span>
+    </div>
+    <div class="navigation-hint" aria-label="Navigate media with arrow keys or W A S D">
+      ↑ ↓ ← →, WASD
+    </div>
+    <div class="header-actions">
+      <button
+        id="zen"
+        title="Zen mode (Z); press Z again to restore controls"
+        aria-keyshortcuts="z"
+        aria-pressed="false"
+      >
+        Zen · Z
+      </button>
+      <button id="mute" title="Toggle sound (M or E)" aria-keyshortcuts="m e">Unmute · M, E</button>
+      <button id="fullscreen" title="Fullscreen (F)" aria-keyshortcuts="f">Fullscreen · F</button>
+      <button id="close" aria-label="Close viewer" title="Close viewer (X or Esc)">✕</button>
+    </div>
   </header>
   <main><div id="stage"></div></main>
   <footer>
@@ -22,12 +27,7 @@
       ><a id="original" target="_blank" rel="noopener noreferrer" hidden>Open post ↗</a>
       <p id="caption"></p>
     </div>
-    <div class="controls">
-      <button id="retry" hidden>Retry media</button
-      ><span class="hint">↑ ↓ / W S · Z zen · X close</span
-      ><button id="previous" aria-label="Previous media">↑</button
-      ><button id="next" aria-label="Next media">↓</button>
-    </div>
     <div id="status" class="status" role="status" aria-live="polite"></div>
+    <button id="retry" hidden>Retry media</button>
   </footer>
 </section>

@@ -18,7 +18,7 @@ let preparing = 0,
 let items = [],
   byId = new Map(),
   index = 0;
-let host, shadow, stage, status, caption, author, counter, original, previous, next;
+let host, shadow, stage, status, caption, author, counter, original;
 let active = false,
   zen = false,
   muted = true,
@@ -156,8 +156,6 @@ function say(text) {
 function updateControls() {
   const shownIndex = shown ? items.findIndex((item) => item.id === shown.id) : -1;
   counter.textContent = `${shownIndex + 1}/${items.length}`;
-  previous.disabled = !items[index] || index === 0;
-  next.disabled = waitingForNext && index >= items.length - 1;
 }
 function mediaSource(entry) {
   return entry.media.type === 'image'
@@ -510,10 +508,7 @@ function move(delta) {
 }
 function updateMuteButton() {
   const button = shadow.querySelector('#mute');
-  // Static labels: highlight shortcuts without changing the word’s casing.
-  button.innerHTML = muted
-    ? 'Un<span class="hotkey">m</span>ut<span class="hotkey">e</span>'
-    : '<span class="hotkey">M</span>ut<span class="hotkey">e</span>';
+  button.textContent = muted ? 'Unmute · M, E' : 'Mute · M, E';
   button.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
 }
 function mute() {
@@ -725,10 +720,6 @@ function open() {
   author = $('author');
   counter = $('counter');
   original = $('original');
-  previous = $('previous');
-  next = $('next');
-  previous.onclick = () => move(-1);
-  next.onclick = () => move(1);
   $('retry').onclick = retryMedia;
   $('mute').onclick = mute;
   $('zen').onclick = toggleZen;

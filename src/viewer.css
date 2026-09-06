@@ -47,7 +47,8 @@ button:disabled {
   outline: 0;
 }
 header {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 16px;
 }
@@ -63,8 +64,21 @@ header {
     12px ui-monospace,
     monospace;
 }
-.spacer {
-  flex: 1;
+.identity,
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+}
+.header-actions {
+  justify-content: flex-end;
+}
+.navigation-hint {
+  text-align: center;
+  color: #96999f;
+  font-size: 12px;
+  white-space: nowrap;
 }
 header button {
   font-size: 12px;
@@ -103,6 +117,8 @@ main {
 }
 #retry {
   font-size: 12px;
+  justify-self: start;
+  margin-top: 8px;
 }
 .count {
   white-space: nowrap;
@@ -110,8 +126,7 @@ main {
 footer {
   padding: 16px 0 19px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: end;
 }
 .meta {
@@ -136,20 +151,6 @@ a {
 }
 a:hover {
   text-decoration: underline;
-}
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-.controls button {
-  font-size: 19px;
-  padding: 5px 16px;
-}
-.hint {
-  color: #7f838b;
-  font-size: 11px;
-  margin-right: 8px;
 }
 .status {
   grid-column: 1/-1;
@@ -176,16 +177,38 @@ a:hover {
 .empty p {
   margin: 12px 0 24px;
 }
+@media (max-width: 1000px) {
+  .viewer {
+    grid-template-rows: 90px minmax(0, 1fr) auto;
+  }
+  header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 16px;
+    padding: 8px 0;
+  }
+  .header-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .navigation-hint {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
 @media (max-width: 650px) {
   .viewer {
     padding: 0 12px;
-    grid-template-rows: 55px minmax(0, 1fr) auto;
+    grid-template-rows: 84px minmax(0, 1fr) auto;
   }
   header {
     gap: 8px;
   }
   .brand {
-    font-size: 9px;
+    display: none;
+  }
+  .identity,
+  .header-actions {
+    gap: 8px;
   }
   .count {
     font-size: 10px;
@@ -197,17 +220,8 @@ a:hover {
   #mute {
     display: none;
   }
-  footer {
-    column-gap: 10px;
-  }
-  .hint {
-    display: none;
-  }
   #caption {
     max-height: 3em;
-  }
-  .controls button {
-    padding: 5px 12px;
   }
 }
 .viewer.zen {
@@ -217,8 +231,4 @@ a:hover {
 }
 .viewer.zen .empty {
   display: none;
-}
-
-.hotkey {
-  color: #d3e8b2;
 }

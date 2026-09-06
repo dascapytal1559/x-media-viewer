@@ -258,7 +258,7 @@ test('a late video source replaces the preview with playable muted media', async
   assert.equal(root.querySelector('#stage video').src, 'https://video.twimg.com/a/high.mp4');
   assert.equal(root.querySelector('#stage video').muted, true);
   const button = root.querySelector('#mute');
-  assert.equal(button.textContent, 'Unmute');
+  assert.equal(button.textContent, 'Unmute · M, E');
   for (const [shortcut, expectedMuted] of [
     ['m', false],
     ['e', true],
@@ -267,19 +267,15 @@ test('a late video source replaces the preview with playable muted media', async
   ]) {
     await key(w, shortcut);
     assert.equal(root.querySelector('#stage video').muted, expectedMuted);
-    assert.equal(button.textContent, expectedMuted ? 'Unmute' : 'Mute');
+    assert.equal(button.textContent, expectedMuted ? 'Unmute · M, E' : 'Mute · M, E');
     assert.equal(button.getAttribute('aria-label'), expectedMuted ? 'Unmute' : 'Mute');
-    assert.deepEqual(
-      [...button.querySelectorAll('.hotkey')].map((node) => node.textContent.toLowerCase()),
-      ['m', 'e'],
-    );
   }
   button.click();
   assert.equal(root.querySelector('#stage video').muted, false);
-  assert.equal(button.textContent, 'Mute');
+  assert.equal(button.textContent, 'Mute · M, E');
   root.querySelector('#stage video').muted = true;
   root.querySelector('#stage video').dispatchEvent(new w.Event('volumechange'));
-  assert.equal(button.textContent, 'Unmute');
+  assert.equal(button.textContent, 'Unmute · M, E');
   dom.window.close();
 });
 test('next at the end scrolls X and advances to newly found media', async () => {
@@ -303,7 +299,6 @@ test('going back cancels a pending next request', async () => {
   await delay(950);
   const root = w.document.querySelector('#x-media-viewer').shadowRoot;
   assert.match(root.querySelector('#counter').textContent, /1\/2/);
-  assert.equal(root.querySelector('#next').disabled, false);
   dom.window.close();
 });
 test('bridge observes a response copy without consuming or changing the original', async () => {
@@ -450,7 +445,6 @@ test('automatically buffers ten media items ahead without changing the displayed
     await delay(70);
     assert.equal(scrolls, 10);
     assert.equal(root.querySelector('#stage img'), displayed);
-    assert.equal(root.querySelector('#next').disabled, false);
   } finally {
     dom.window.close();
   }
@@ -509,7 +503,6 @@ test('a next request joins background loading and advances only once', async () 
     await until(() => root.querySelector('#counter').textContent === '2/12');
     await delay(70);
     assert.match(root.querySelector('#stage img').src, /image2-0/);
-    assert.equal(root.querySelector('#next').disabled, false);
   } finally {
     dom.window.close();
   }
@@ -971,10 +964,10 @@ test('zen mode hides interface and video controls while navigation and toggling 
     let root = w.document.querySelector('#x-media-viewer').shadowRoot;
     const first = root.querySelector('#stage img');
     const zenButton = root.querySelector('#zen');
-    assert.equal(zenButton.textContent.trim(), 'Zen');
-    assert.equal(zenButton.querySelector('.hotkey').textContent, 'Z');
-    assert.equal(root.querySelector('#fullscreen').textContent.trim(), 'Fullscreen');
-    assert.equal(root.querySelector('#fullscreen .hotkey').textContent, 'F');
+    assert.equal(zenButton.textContent.trim(), 'Zen · Z');
+    assert.equal(root.querySelector('#fullscreen').textContent.trim(), 'Fullscreen · F');
+    assert.equal(root.querySelector('header .navigation-hint').textContent.trim(), '↑ ↓ ← →, WASD');
+    assert.equal(root.querySelector('footer .controls'), null);
     assert.equal(zenButton.getAttribute('aria-pressed'), 'false');
     zenButton.click();
     assert.equal(zenButton.getAttribute('aria-pressed'), 'true');
