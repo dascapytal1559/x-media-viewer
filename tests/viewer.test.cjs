@@ -257,15 +257,30 @@ test('a late video source replaces the preview with playable muted media', async
   await delay(0);
   assert.equal(root.querySelector('#stage video').src, 'https://video.twimg.com/a/high.mp4');
   assert.equal(root.querySelector('#stage video').muted, true);
-  await key(w, 'm');
-  assert.equal(root.querySelector('#stage video').muted, true);
-  await key(w, 'e');
+  const button = root.querySelector('#mute');
+  assert.equal(button.textContent, 'UNMUTE');
+  for (const [shortcut, expectedMuted] of [
+    ['m', false],
+    ['e', true],
+    ['M', false],
+    ['E', true],
+  ]) {
+    await key(w, shortcut);
+    assert.equal(root.querySelector('#stage video').muted, expectedMuted);
+    assert.equal(button.textContent, expectedMuted ? 'UNMUTE' : 'MUTE');
+    assert.equal(button.getAttribute('aria-label'), expectedMuted ? 'Unmute' : 'Mute');
+    assert.deepEqual(
+      [...button.querySelectorAll('u')].map((node) => node.textContent),
+      ['M', 'E'],
+    );
+  }
+  button.click();
   assert.equal(root.querySelector('#stage video').muted, false);
-  assert.equal(root.querySelector('#mute').textContent, 'Mute · E');
-  await key(w, 'E');
-  assert.equal(root.querySelector('#stage video').muted, true);
-  await key(w, 'e');
-  assert.equal(root.querySelector('#stage video').muted, false);
+  assert.equal(button.textContent, 'MUTE');
+  root.querySelector('#stage video').muted = true;
+  root.querySelector('#stage video').dispatchEvent(new w.Event('volumechange'));
+  assert.equal(button.textContent, 'UNMUTE');
+  assert.equal(button.querySelectorAll('u').length, 2);
   dom.window.close();
 });
 test('next at the end scrolls X and advances to newly found media', async () => {
@@ -914,7 +929,7 @@ test('viewer hotkeys leave text editing, composition, and modified shortcuts alo
     for (const target of parent.querySelectorAll(
       'input, textarea, select, [contenteditable] span, [role="textbox"]',
     )) {
-      for (const value of ['x', 'w', 's', 'a', 'd', 'e', 'z']) {
+      for (const value of ['x', 'w', 's', 'a', 'd', 'e', 'm', 'z']) {
         const event = new w.KeyboardEvent('keydown', {
           key: value,
           bubbles: true,

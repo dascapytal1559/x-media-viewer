@@ -15,7 +15,7 @@ The viewer opens in the current tab near the post you are viewing. Closing retur
 | X or extension icon               | Open / close                            |
 | ↑ / ↓, ← / →, W / S, A / D, K / J | Previous / next media                   |
 | Mouse wheel or vertical swipe     | Previous / next media                   |
-| E                                 | Mute / unmute                           |
+| M or E                            | Mute / unmute                           |
 | Space                             | Play / pause video                      |
 | Z                                 | Show only media / restore the interface |
 | F                                 | Enter / exit browser fullscreen         |

@@ -285,7 +285,7 @@ function startPreparing(record) {
     video.onvolumechange = () => {
       if (shown !== record || !active) return;
       muted = video.muted;
-      shadow.querySelector('#mute').textContent = muted ? 'Unmute · E' : 'Mute · E';
+      updateMuteButton();
     };
     video.src = record.src;
     video.load();
@@ -522,11 +522,17 @@ function move(delta) {
     ensureAhead();
   } else if (delta > 0) loadMore(true);
 }
+function updateMuteButton() {
+  const button = shadow.querySelector('#mute');
+  // Static labels only: underline both available keyboard shortcuts.
+  button.innerHTML = muted ? 'UN<u>M</u>UT<u>E</u>' : '<u>M</u>UT<u>E</u>';
+  button.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
+}
 function mute() {
   muted = !muted;
   const video = stage.querySelector('video');
   if (video) video.muted = muted;
-  shadow.querySelector('#mute').textContent = muted ? 'Unmute · E' : 'Mute · E';
+  updateMuteButton();
 }
 function playPause() {
   const video = stage.querySelector('video');
@@ -597,6 +603,7 @@ function keydown(event) {
     w: () => move(-1),
     ' ': playPause,
     e: mute,
+    m: mute,
     z: toggleZen,
     f: fullscreen,
     r: retryMedia,
@@ -737,7 +744,7 @@ function open() {
   $('mute').onclick = mute;
   $('fullscreen').onclick = fullscreen;
   $('close').onclick = close;
-  $('mute').textContent = muted ? 'Unmute · E' : 'Mute · E';
+  updateMuteButton();
   // Keep keyboard focus inside the viewer while allowing X to load underneath.
   for (const element of document.body.children)
     if (element !== host && !element.inert) {

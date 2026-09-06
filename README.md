@@ -31,7 +31,7 @@ After rebuilding, click **Reload** on the extension’s card and refresh existin
 | X                                 | Open / close viewer                            |
 | ↑ / ↓, ← / →, W / S, A / D, K / J | Previous / next image or video                 |
 | Wheel or vertical swipe           | Previous / next image or video                 |
-| E                                 | Mute / unmute                                  |
+| M or E                            | Mute / unmute                                  |
 | Space                             | Play / pause video                             |
 | Z                                 | Toggle zen mode                                |
 | F                                 | Toggle browser fullscreen                      |
