@@ -556,6 +556,7 @@ async function fullscreen() {
 function applyZen() {
   const viewer = shadow.querySelector('.viewer');
   viewer.classList.toggle('zen', zen);
+  shadow.querySelector('#zen').setAttribute('aria-pressed', String(zen));
   shadow.querySelector('header').hidden = zen;
   shadow.querySelector('footer').hidden = zen;
   for (const record of prepared.values())
@@ -741,6 +742,7 @@ function open() {
   next.onclick = () => move(1);
   $('retry').onclick = retryMedia;
   $('mute').onclick = mute;
+  $('zen').onclick = toggleZen;
   $('fullscreen').onclick = fullscreen;
   $('close').onclick = close;
   updateMuteButton();

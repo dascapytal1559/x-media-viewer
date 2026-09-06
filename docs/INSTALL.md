@@ -17,7 +17,7 @@ The viewer opens in the current tab near the post you are viewing. Closing retur
 | Mouse wheel or vertical swipe     | Previous / next media                   |
 | M or E                            | Mute / unmute                           |
 | Space                             | Play / pause video                      |
-| Z                                 | Show only media / restore the interface |
+| Z or Zen button                   | Show only media / restore the interface |
 | F                                 | Enter / exit browser fullscreen         |
 | R                                 | Retry failed media                      |
 | Esc                               | Close; Chrome may first exit fullscreen |

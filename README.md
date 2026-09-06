@@ -33,7 +33,7 @@ After rebuilding, click **Reload** on the extension’s card and refresh existin
 | Wheel or vertical swipe           | Previous / next image or video                 |
 | M or E                            | Mute / unmute                                  |
 | Space                             | Play / pause video                             |
-| Z                                 | Toggle zen mode                                |
+| Z or Zen button                   | Toggle zen mode                                |
 | F                                 | Toggle browser fullscreen                      |
 | R                                 | Retry failed media                             |
 | Esc                               | Close viewer; Chrome may first exit fullscreen |

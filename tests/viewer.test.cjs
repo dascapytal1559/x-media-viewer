@@ -964,7 +964,11 @@ test('zen mode hides interface and video controls while navigation and toggling 
   try {
     let root = w.document.querySelector('#x-media-viewer').shadowRoot;
     const first = root.querySelector('#stage img');
-    await key(w, 'z');
+    const zenButton = root.querySelector('#zen');
+    assert.equal(zenButton.textContent.trim(), 'Zen · Z');
+    assert.equal(zenButton.getAttribute('aria-pressed'), 'false');
+    zenButton.click();
+    assert.equal(zenButton.getAttribute('aria-pressed'), 'true');
     assert.equal(root.querySelector('.viewer').classList.contains('zen'), true);
     assert.equal(root.querySelector('header').hidden, true);
     assert.equal(root.querySelector('footer').hidden, true);
@@ -983,6 +987,7 @@ test('zen mode hides interface and video controls while navigation and toggling 
     root.querySelector('.viewer').dispatchEvent(tab);
     assert.equal(tab.defaultPrevented, true);
     await key(w, 'Z');
+    assert.equal(zenButton.getAttribute('aria-pressed'), 'false');
     assert.equal(root.querySelector('.viewer').classList.contains('zen'), false);
     assert.equal(root.querySelector('header').hidden, false);
     assert.equal(root.querySelector('footer').hidden, false);
