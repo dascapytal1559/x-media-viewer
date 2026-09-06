@@ -966,7 +966,10 @@ test('zen mode hides interface and video controls while navigation and toggling 
     const zenButton = root.querySelector('#zen');
     assert.equal(zenButton.textContent.trim(), 'Zen · Z');
     assert.equal(root.querySelector('#fullscreen').textContent.trim(), 'Fullscreen · F');
-    assert.equal(root.querySelector('header .navigation-hint').textContent.trim(), '↑ ↓ ← →, WASD');
+    assert.equal(
+      root.querySelector('header .navigation-hint').textContent.replace(/\s+/g, ' ').trim(),
+      '1/2 · ↑ ↓ ← →, WASD',
+    );
     assert.equal(root.querySelector('footer .controls'), null);
     assert.equal(zenButton.getAttribute('aria-pressed'), 'false');
     zenButton.click();
