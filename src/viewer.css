@@ -48,7 +48,7 @@ button:disabled {
 }
 header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 16px;
 }
@@ -75,7 +75,7 @@ header {
   justify-content: flex-end;
 }
 .navigation-hint {
-  text-align: center;
+  text-align: left;
   color: #96999f;
   font-size: 12px;
   white-space: nowrap;
