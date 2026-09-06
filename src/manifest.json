@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "X Media Viewer",
-  "version": "1.4.18",
+  "version": "1.4.19",
   "minimum_chrome_version": "111",
   "description": "Browse X photos and videos fullscreen with up/down navigation, decoded images and buffered videos prepared ahead.",
   "action": {
