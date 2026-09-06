@@ -80,6 +80,9 @@ header {
   font-size: 12px;
   white-space: nowrap;
 }
+.navigation-separator {
+  margin-inline: 10px;
+}
 header button {
   font-size: 12px;
   background: transparent;
