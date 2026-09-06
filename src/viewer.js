@@ -510,7 +510,10 @@ function move(delta) {
 }
 function updateMuteButton() {
   const button = shadow.querySelector('#mute');
-  button.textContent = muted ? 'Unmute · M, E' : 'Mute · M, E';
+  // Static labels: highlight shortcuts without changing the word’s casing.
+  button.innerHTML = muted
+    ? 'Un<span class="hotkey">m</span>ut<span class="hotkey">e</span>'
+    : '<span class="hotkey">M</span>ut<span class="hotkey">e</span>';
   button.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
 }
 function mute() {

@@ -218,3 +218,7 @@ a:hover {
 .viewer.zen .empty {
   display: none;
 }
+
+.hotkey {
+  color: #d3e8b2;
+}
