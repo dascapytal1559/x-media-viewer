@@ -524,8 +524,7 @@ function move(delta) {
 }
 function updateMuteButton() {
   const button = shadow.querySelector('#mute');
-  // Static labels only: underline both available keyboard shortcuts.
-  button.innerHTML = muted ? 'UN<u>M</u>UT<u>E</u>' : '<u>M</u>UT<u>E</u>';
+  button.textContent = muted ? 'Unmute · M, E' : 'Mute · M, E';
   button.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
 }
 function mute() {

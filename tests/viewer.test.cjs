@@ -258,7 +258,7 @@ test('a late video source replaces the preview with playable muted media', async
   assert.equal(root.querySelector('#stage video').src, 'https://video.twimg.com/a/high.mp4');
   assert.equal(root.querySelector('#stage video').muted, true);
   const button = root.querySelector('#mute');
-  assert.equal(button.textContent, 'UNMUTE');
+  assert.equal(button.textContent, 'Unmute · M, E');
   for (const [shortcut, expectedMuted] of [
     ['m', false],
     ['e', true],
@@ -267,20 +267,15 @@ test('a late video source replaces the preview with playable muted media', async
   ]) {
     await key(w, shortcut);
     assert.equal(root.querySelector('#stage video').muted, expectedMuted);
-    assert.equal(button.textContent, expectedMuted ? 'UNMUTE' : 'MUTE');
+    assert.equal(button.textContent, expectedMuted ? 'Unmute · M, E' : 'Mute · M, E');
     assert.equal(button.getAttribute('aria-label'), expectedMuted ? 'Unmute' : 'Mute');
-    assert.deepEqual(
-      [...button.querySelectorAll('u')].map((node) => node.textContent),
-      ['M', 'E'],
-    );
   }
   button.click();
   assert.equal(root.querySelector('#stage video').muted, false);
-  assert.equal(button.textContent, 'MUTE');
+  assert.equal(button.textContent, 'Mute · M, E');
   root.querySelector('#stage video').muted = true;
   root.querySelector('#stage video').dispatchEvent(new w.Event('volumechange'));
-  assert.equal(button.textContent, 'UNMUTE');
-  assert.equal(button.querySelectorAll('u').length, 2);
+  assert.equal(button.textContent, 'Unmute · M, E');
   dom.window.close();
 });
 test('next at the end scrolls X and advances to newly found media', async () => {
