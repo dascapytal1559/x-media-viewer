@@ -1,6 +1,6 @@
 {
   "name": "x-media-viewer",
-  "version": "1.4.17",
+  "version": "1.4.18",
   "private": true,
   "description": "A keyboard-driven fullscreen media viewer for X timelines.",
   "type": "module",

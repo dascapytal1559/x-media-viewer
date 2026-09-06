@@ -81,6 +81,7 @@ header {
   white-space: nowrap;
 }
 .navigation-separator {
+  visibility: hidden;
   margin-inline: 10px;
 }
 header button {
