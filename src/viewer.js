@@ -2,6 +2,7 @@ import styles from './viewer.css';
 import template from './viewer.html';
 import * as core from './media-core.js';
 const videos = new Map();
+const keyboardSeeking = new WeakSet();
 const min_loaded_left = 10;
 const load_step_ms = 850;
 const max_load_steps = 30;
@@ -256,6 +257,17 @@ function startPreparing(record) {
     video.preload = 'auto';
     video.poster = record.entry.media.poster;
     video.setAttribute('aria-label', `Video by ${record.entry.post.author}`);
+    // Chrome reveals its controls on seeking. Keyboard skips should leave
+    // their visibility alone; normal time updates still refresh the timeline.
+    video.addEventListener(
+      'seeking',
+      (event) => {
+        if (keyboardSeeking.has(video)) event.stopImmediatePropagation();
+      },
+      true,
+    );
+    for (const event of ['seeked', 'pointerdown', 'emptied', 'error'])
+      video.addEventListener(event, () => keyboardSeeking.delete(video), true);
     for (const event of ['loadeddata', 'loadedmetadata', 'progress', 'canplay', 'canplaythrough'])
       video.addEventListener(event, check);
     video.onerror = () => {
@@ -524,6 +536,25 @@ function playPause() {
     else video.pause();
   }
 }
+function seek(seconds) {
+  const video = stage.querySelector('video');
+  if (!video || !Number.isFinite(video.duration)) return;
+  keyboardSeeking.add(video);
+  video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + seconds));
+  const previous = stage.querySelector('.seek-indicator');
+  const direction = seconds < 0 ? 'backward' : 'forward';
+  const total =
+    seconds + (previous?.dataset.direction === direction ? Number(previous.dataset.seconds) : 0);
+  previous?.remove();
+  const indicator = document.createElement('div');
+  indicator.className = 'seek-indicator';
+  indicator.dataset.direction = direction;
+  indicator.dataset.seconds = String(total);
+  indicator.textContent = `${total < 0 ? '−' : '+'}${Math.abs(total)}s`;
+  indicator.setAttribute('aria-hidden', 'true');
+  indicator.addEventListener('animationend', () => indicator.remove(), { once: true });
+  stage.append(indicator);
+}
 function pauseBackground(event) {
   if (active && event.target?.tagName === 'VIDEO' && !event.composedPath().includes(host))
     event.target.pause();
@@ -575,15 +606,13 @@ function keydown(event) {
   }
   if (!active) return;
   const actions = {
-    a: () => move(-1),
-    d: () => move(1),
-    arrowright: () => move(1),
-    arrowleft: () => move(-1),
+    a: () => seek(-5),
+    d: () => seek(5),
+    arrowright: () => seek(5),
+    arrowleft: () => seek(-5),
     arrowdown: () => move(1),
-    j: () => move(1),
     s: () => move(1),
     arrowup: () => move(-1),
-    k: () => move(-1),
     w: () => move(-1),
     ' ': playPause,
     e: mute,

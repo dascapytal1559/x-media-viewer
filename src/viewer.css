@@ -119,6 +119,50 @@ main {
   pointer-events: none;
   background: #000;
 }
+.seek-indicator {
+  position: absolute;
+  top: 50%;
+  left: 3.5%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 18px;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: clamp(22px, 2vw, 36px);
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 1px 6px #000;
+  filter: drop-shadow(0 1px 3px #0008);
+  pointer-events: none;
+  animation: seek-feedback 1000ms ease-out forwards;
+}
+.seek-indicator::before {
+  content: '';
+  width: 0.55em;
+  height: 0.55em;
+  border-left: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
+  transform: rotate(45deg);
+}
+.seek-indicator[data-direction='forward'] {
+  left: auto;
+  right: 3.5%;
+  flex-direction: row-reverse;
+}
+.seek-indicator[data-direction='forward']::before {
+  transform: rotate(225deg);
+}
+@keyframes seek-feedback {
+  0%,
+  65% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 #retry {
   font-size: 12px;
   justify-self: start;

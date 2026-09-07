@@ -3,7 +3,7 @@
 Turn the X timeline you are already browsing into a fullscreen image and video viewer. Move through every attachment with the keyboard, including multiple images or videos from the same post.
 
 - Open or close with **X** or the extension icon.
-- Browse with arrows, **W/S**, **A/D**, or **K/J**.
+- Browse with **↑/↓** or **W/S**.
 - Prepare ten media items ahead: downloaded and decoded images, and buffered videos.
 - Keep the current media visible while the next item prepares.
 - Press **Z** for a content-only zen mode and **F** for browser fullscreen.
@@ -26,17 +26,18 @@ After rebuilding, click **Reload** on the extension’s card and refresh existin
 
 ## Controls
 
-| Key                               | Action                                         |
-| --------------------------------- | ---------------------------------------------- |
-| X                                 | Open / close viewer                            |
-| ↑ / ↓, ← / →, W / S, A / D, K / J | Previous / next image or video                 |
-| Wheel or vertical swipe           | Previous / next image or video                 |
-| M or E                            | Mute / unmute                                  |
-| Space                             | Play / pause video                             |
-| Z or Zen button                   | Toggle zen mode                                |
-| F                                 | Toggle browser fullscreen                      |
-| R                                 | Retry failed media                             |
-| Esc                               | Close viewer; Chrome may first exit fullscreen |
+| Key                     | Action                                         |
+| ----------------------- | ---------------------------------------------- |
+| X                       | Open / close viewer                            |
+| ↑ / ↓, W / S            | Previous / next image or video                 |
+| ← / →, A / D            | Seek video backward / forward 5 seconds        |
+| Wheel or vertical swipe | Previous / next image or video                 |
+| M or E                  | Mute / unmute                                  |
+| Space                   | Play / pause video                             |
+| Z or Zen button         | Toggle zen mode                                |
+| F                       | Toggle browser fullscreen                      |
+| R                       | Retry failed media                             |
+| Esc                     | Close viewer; Chrome may first exit fullscreen |
 
 Shortcuts ignore text fields, text composition, and Ctrl/Command/Alt combinations. Zen mode hides the viewer interface and video controls while preserving keyboard shortcuts. It is remembered in the current tab until refresh.
 

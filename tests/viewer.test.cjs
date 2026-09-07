@@ -871,7 +871,7 @@ test('closing after a route change does not scroll the new timeline', async () =
     w.close();
   }
 });
-test('X opens and closes repeatedly, while W/S and left/right traverse flattened media', async () => {
+test('X opens and closes repeatedly, while W/S traverses media and seek keys leave images alone', async () => {
   const dom = await setup(image('1', 2) + image('2'), true),
     w = dom.window;
   try {
@@ -887,20 +887,11 @@ test('X opens and closes repeatedly, while W/S and left/right traverse flattened
     assert.equal(root.querySelector('#counter').textContent, '2/3');
     await key(w, 'w');
     assert.equal(root.querySelector('#counter').textContent, '1/3');
-    await key(w, 'ArrowRight');
-    assert.equal(root.querySelector('#counter').textContent, '2/3');
-    await key(w, 'ArrowRight');
-    assert.equal(root.querySelector('#counter').textContent, '3/3');
-    await key(w, 'ArrowLeft');
-    assert.equal(root.querySelector('#counter').textContent, '2/3');
-    await key(w, 'a');
-    assert.equal(root.querySelector('#counter').textContent, '1/3');
-    await key(w, 'd');
-    assert.equal(root.querySelector('#counter').textContent, '2/3');
-    await key(w, 'D');
-    assert.equal(root.querySelector('#counter').textContent, '3/3');
-    await key(w, 'A');
-    assert.equal(root.querySelector('#counter').textContent, '2/3');
+    for (const value of ['ArrowRight', 'ArrowLeft', 'a', 'A', 'd', 'D', 'j', 'J', 'k', 'K']) {
+      await key(w, value);
+      assert.equal(root.querySelector('#counter').textContent, '1/3');
+      assert.equal(root.querySelector('.seek-indicator'), null);
+    }
     w.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'x', repeat: true, cancelable: true }));
     assert.ok(w.document.querySelector('#x-media-viewer'));
     await key(w, 'x');
@@ -953,6 +944,42 @@ test('viewer hotkeys leave text editing, composition, and modified shortcuts alo
   }
 });
 
+test('keyboard seeks suppress native seek reveal without changing controls or focus', async () => {
+  const clip = video('9').replace(
+    'blob:https://x.com/unusable',
+    'https://video.twimg.com/a/high.mp4',
+  );
+  const dom = await setup(clip, true),
+    w = dom.window;
+  try {
+    const root = w.document.querySelector('#x-media-viewer').shadowRoot;
+    const player = root.querySelector('#stage video');
+    let nativeSeeks = 0;
+    player.addEventListener('seeking', () => nativeSeeks++);
+    player.tabIndex = 0;
+    player.focus();
+    for (const value of ['ArrowLeft', 'ArrowRight', 'a', 'd']) {
+      await key(w, value);
+      player.dispatchEvent(new w.Event('seeking'));
+      assert.equal(nativeSeeks, 0);
+      assert.equal(player.controls, true);
+      assert.equal(root.activeElement, player);
+      player.dispatchEvent(new w.Event('seeked'));
+    }
+    player.dispatchEvent(new w.Event('seeking'));
+    assert.equal(nativeSeeks, 1);
+    await key(w, 'd');
+    player.dispatchEvent(new w.Event('pointerdown', { bubbles: true }));
+    player.dispatchEvent(new w.Event('seeking'));
+    assert.equal(nativeSeeks, 2);
+    await key(w, 'z');
+    await key(w, 'd');
+    assert.equal(player.controls, false);
+  } finally {
+    w.close();
+  }
+});
+
 test('zen mode hides interface and video controls while navigation and toggling keep working', async () => {
   const clip = video('9').replace(
     'blob:https://x.com/unusable',
@@ -968,7 +995,7 @@ test('zen mode hides interface and video controls while navigation and toggling 
     assert.equal(root.querySelector('#fullscreen').textContent.trim(), 'Fullscreen · F');
     assert.equal(
       root.querySelector('header .navigation-hint').textContent.replace(/\s+/g, ' ').trim(),
-      '1/2 ↑ ↓ ← →, WASD',
+      '1/2 ↑ ↓, W/S ← →, A/D · 5s',
     );
     assert.equal(root.querySelector('footer .controls'), null);
     assert.equal(zenButton.getAttribute('aria-pressed'), 'false');
@@ -981,6 +1008,45 @@ test('zen mode hides interface and video controls while navigation and toggling 
     await key(w, 's');
     const player = root.querySelector('#stage video');
     assert.equal(player.controls, false);
+    player.currentTime = 12;
+    await key(w, 'ArrowRight');
+    assert.equal(player.currentTime, 17);
+    await key(w, 'ArrowLeft');
+    assert.equal(player.currentTime, 12);
+    player.currentTime = 2;
+    await key(w, 'ArrowLeft');
+    assert.equal(player.currentTime, 0);
+    player.currentTime = 28;
+    await key(w, 'ArrowRight');
+    assert.equal(player.currentTime, 30);
+    assert.equal(root.querySelector('#stage video'), player);
+    assert.equal(root.querySelector('#counter').textContent, '2/2');
+    player.currentTime = 12;
+    for (const [value, label] of [
+      ['ArrowLeft', '−5s'],
+      ['a', '−10s'],
+      ['A', '−15s'],
+      ['ArrowRight', '+5s'],
+      ['d', '+10s'],
+      ['D', '+15s'],
+    ]) {
+      const previous = player.currentTime;
+      const backward = ['ArrowLeft', 'a', 'A'].includes(value);
+      await key(w, value);
+      assert.equal(player.currentTime, Math.max(0, previous + (backward ? -5 : 5)));
+      const indicators = root.querySelectorAll('.seek-indicator');
+      assert.equal(indicators.length, 1);
+      assert.equal(indicators[0].textContent, label);
+      assert.equal(indicators[0].dataset.direction, backward ? 'backward' : 'forward');
+    }
+    root.querySelector('.seek-indicator').dispatchEvent(new w.Event('animationend'));
+    assert.equal(root.querySelector('.seek-indicator'), null);
+    await key(w, 'd');
+    assert.equal(root.querySelector('.seek-indicator').textContent, '+5s');
+    const expired = root.querySelector('.seek-indicator');
+    await key(w, 'ArrowRight');
+    expired.dispatchEvent(new w.Event('animationend'));
+    assert.equal(root.querySelector('.seek-indicator').textContent, '+10s');
     await key(w, 'e');
     assert.equal(player.muted, false);
     const tab = new w.KeyboardEvent('keydown', {
@@ -998,6 +1064,11 @@ test('zen mode hides interface and video controls while navigation and toggling 
     assert.equal(root.querySelector('footer').hidden, false);
     assert.equal(root.querySelector('#stage video'), player);
     assert.equal(player.controls, true);
+    await key(w, 'd');
+    assert.ok(root.querySelector('.seek-indicator'));
+    await key(w, 'w');
+    assert.ok(root.querySelector('#stage img'));
+    assert.equal(root.querySelector('.seek-indicator'), null);
     await key(w, 'z');
     await key(w, 'x');
     await key(w, 'x');

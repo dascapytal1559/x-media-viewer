@@ -21,7 +21,7 @@ Suggested category: Workflow & Planning, if available in the dashboard. Language
 
 Browse the X timeline you are already viewing as a focused image and video feed.
 
-Press X or click the extension icon to open the viewer in the current tab. Move through photos and videos using arrow keys, WASD, K/J, your mouse wheel, or a vertical swipe. Every attachment is a separate step, including multiple attachments from the same post.
+Press X or click the extension icon to open the viewer in the current tab. Move through photos and videos using up/down arrow keys, W/S, your mouse wheel, or a vertical swipe. Every attachment is a separate step, including multiple attachments from the same post. Use left/right arrows or A/D to seek backward/forward 5 seconds in a video.
 
 The viewer prepares ten media items ahead. It downloads and decodes images and buffers the beginning of videos. If you move faster than loading completes, the current media stays visible while your selection prepares. The counter shows your position among discovered media; it does not claim every item is downloaded.
 
@@ -65,7 +65,7 @@ The three Limited Use certifications are consistent with this implementation: no
 
 1. Install in Chrome 111 or newer. Open https://x.com/home or a profile timeline with photos and videos. Sign in to X if X requires it. The extension has no separate account system. Use a reviewer-controlled X account; no publisher credentials are included.
 2. Press X or click the extension icon. The viewer should open in the same tab.
-3. Use arrows or WASD to traverse media. Multiple attachments from one post appear consecutively. Allow time for media to prepare, then navigate forward and backward.
+3. Use up/down arrows or W/S to traverse media. Multiple attachments from one post appear consecutively. Allow time for media to prepare, then navigate forward and backward.
 4. On video, test M/E for mute and Space for playback. Not every embed or live stream is supported.
 5. Press Z, then Z again, to hide and restore the interface. Test F for browser fullscreen.
 6. Close with X or Esc. The underlying timeline should return near the displayed post.

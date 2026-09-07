@@ -10,19 +10,20 @@ For a release ZIP, extract it and keep the `x-media-viewer` folder somewhere per
 
 The viewer opens in the current tab near the post you are viewing. Closing returns to the post containing the displayed media. No additional login is required beyond your normal X session.
 
-| Key                               | Action                                  |
-| --------------------------------- | --------------------------------------- |
-| X or extension icon               | Open / close                            |
-| ↑ / ↓, ← / →, W / S, A / D, K / J | Previous / next media                   |
-| Mouse wheel or vertical swipe     | Previous / next media                   |
-| M or E                            | Mute / unmute                           |
-| Space                             | Play / pause video                      |
-| Z or Zen button                   | Show only media / restore the interface |
-| F                                 | Enter / exit browser fullscreen         |
-| R                                 | Retry failed media                      |
-| Esc                               | Close; Chrome may first exit fullscreen |
+| Key                           | Action                                  |
+| ----------------------------- | --------------------------------------- |
+| X or extension icon           | Open / close                            |
+| ↑ / ↓, W / S                  | Previous / next media                   |
+| ← / →, A / D                  | Seek video backward / forward 5 seconds |
+| Mouse wheel or vertical swipe | Previous / next media                   |
+| M or E                        | Mute / unmute                           |
+| Space                         | Play / pause video                      |
+| Z or Zen button               | Show only media / restore the interface |
+| F                             | Enter / exit browser fullscreen         |
+| R                             | Retry failed media                      |
+| Esc                           | Close; Chrome may first exit fullscreen |
 
-Text entry and modified keyboard shortcuts are left alone. Every attachment is a separate step. Videos loop and initially play muted. In zen mode, keyboard shortcuts remain available, including Z to restore controls.
+Text entry and modified keyboard shortcuts are left alone. Every attachment is a separate step. Videos loop and initially play muted. Keyboard skips show the ±Xs indicator without revealing the native video controls. Pointer controls keep working normally. In zen mode, keyboard shortcuts remain available, including Z to restore controls.
 
 The header shows a compact position such as **1/12**: the displayed item out of the media discovered so far. If the next item is still preparing, the current visual stays visible. Video readiness means an opening playback buffer, not the entire video downloaded.
 
