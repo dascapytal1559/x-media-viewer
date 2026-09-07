@@ -1,3 +1,4 @@
+import './assets.mjs';
 import { build } from 'esbuild';
 import { mkdir, readFile, writeFile, copyFile, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -8,7 +9,13 @@ const output = path.join(root, 'outputs/x-media-viewer');
 const manifest = JSON.parse(await readFile(path.join(root, 'src/manifest.json'), 'utf8'));
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
 if (pkg.version !== manifest.version) throw new Error('Package and extension versions must match.');
-await mkdir(output, { recursive: true });
+await mkdir(path.join(output, 'icons'), { recursive: true });
+for (const size of [16, 32, 48, 128]) {
+  await copyFile(
+    path.join(root, `outputs/store/icon-${size}.png`),
+    path.join(output, `icons/icon-${size}.png`),
+  );
+}
 await build({
   absWorkingDir: root,
   entryPoints: ['src/viewer.js', 'src/bridge.js', 'src/background.js'],

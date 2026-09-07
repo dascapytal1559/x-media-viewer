@@ -1,6 +1,6 @@
 {
   "name": "x-media-viewer",
-  "version": "1.4.19",
+  "version": "1.4.20",
   "private": true,
   "description": "A keyboard-driven fullscreen media viewer for X timelines.",
   "type": "module",
@@ -17,6 +17,7 @@
     "package": "npm run build && node scripts/package.mjs"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
     "esbuild": "0.28.2",
     "fflate": "0.8.3",
     "jsdom": "26.1.0",

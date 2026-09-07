@@ -1,11 +1,15 @@
 {
   "manifest_version": 3,
   "name": "X Media Viewer",
-  "version": "1.4.19",
+  "version": "1.4.20",
   "minimum_chrome_version": "111",
   "description": "Browse X photos and videos fullscreen with up/down navigation, decoded images and buffered videos prepared ahead.",
   "action": {
-    "default_title": "View this X timeline"
+    "default_title": "View this X timeline",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
   },
   "background": {
     "service_worker": "background.js"
@@ -23,5 +27,12 @@
       "run_at": "document_start",
       "world": "ISOLATED"
     }
-  ]
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "homepage_url": "https://github.com/dascapytal1559/x-media-viewer"
 }

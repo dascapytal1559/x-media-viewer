@@ -21,5 +21,5 @@ Use a normal X session and a timeline containing images, video, and multiple att
 
 - Run `npm ci`, `npm run check`, and `npm run package` from a fresh checkout.
 - Inspect the tracked files and release ZIP. Generated output, local backups, dependencies, credentials, and personal timeline captures should not be tracked.
-- Keep the first GitHub repository private until a public release is requested. Confirm the MIT license is included in the repository and release ZIP. The package remains protected from accidental npm publishing by `private: true`.
+- Confirm that repository visibility matches the release plan; this repository is now public. Confirm the MIT license is included in the repository and release ZIP. The package remains protected from accidental npm publishing by `private: true`.
 - Record live browser results and known limitations before tagging a release. A passing CI run alone is not live X verification.

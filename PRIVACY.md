@@ -9,3 +9,15 @@ The viewer requests images from `pbs.twimg.com` and MP4 video from `video.twimg.
 The extension does not send timeline content to an external service, include analytics, or use a backend. It does not save feed history in extension storage. Media playback resources are released when the viewer closes; cached post and URL data remain in tab memory until cleared or the tab closes. Chrome may independently cache downloaded media through its normal browser cache.
 
 A viewer link opened with **Open post** navigates to X normally. The extension does not post, like, repost, follow, or send messages on your behalf.
+
+## Limited Use
+
+X Media Viewer’s use of user data complies with the Chrome Web Store User Data Policy, including its Limited Use requirements. Website content and media resource URLs are used only to provide the user-facing media viewer and its loading features. We do not sell data, use it for advertising, use it to determine creditworthiness, or provide developers with access to users’ browsing content.
+
+## Control and contact
+
+Close the viewer to stop loading ahead. Refresh or close the X tab to clear its in-memory state. Disable or uninstall the extension to stop it observing X pages. Chrome manages its own media cache separately.
+
+For questions, use the project’s [support page](https://github.com/dascapytal1559/x-media-viewer/issues). Do not include private posts, credentials, or personal timeline captures in public issues.
+
+Last updated: 7 September 2026.
