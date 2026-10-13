@@ -12,7 +12,7 @@ if (pkg.version !== manifest.version) throw new Error('Package and extension ver
 await mkdir(path.join(output, 'icons'), { recursive: true });
 for (const size of [16, 32, 48, 128]) {
   await copyFile(
-    path.join(root, `outputs/store/icon-${size}.png`),
+    path.join(root, `outputs/icons/icon-${size}.png`),
     path.join(output, `icons/icon-${size}.png`),
   );
 }
