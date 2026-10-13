@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#224b61"/><stop offset=".75" stop-color="#bdcdbb"/><stop offset="1" stop-color="#eed7af"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#94b5b4"/><stop offset="1" stop-color="#1e505c"/></linearGradient><linearGradient id="rock" x2="1" y2="1"><stop stop-color="#526b6b"/><stop offset="1" stop-color="#18393f"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#sky)"/><circle cx="1170" cy="254" r="91" fill="#fff1cb"/>
+<path d="M0 565L160 450L275 485L496 285L670 487L807 368L1018 557L1194 414L1430 566L1600 494V750H0Z" fill="#869e9b"/>
+<path d="M420 369L496 285L574 374L526 355L497 322L463 365Z" fill="#e0e3ce"/>
+<path d="M0 632L239 518L427 599L662 491L875 632L1144 550L1360 626L1600 565V785H0Z" fill="#486e71"/>
+<path d="M0 693C347 648 692 736 940 676S1389 674 1600 640V1000H0Z" fill="url(#water)"/>
+<path d="M0 457L67 483L133 667L286 737L462 1000H0Z" fill="url(#rock)"/>
+<path d="M1600 732L1451 771L1352 821L1282 1000H1600Z" fill="#12313a"/>
+<path d="M719 782H1165M677 815H1280M554 857H1130M604 899H1207" stroke="#d4e0ca" stroke-width="3" opacity=".4"/>
+<path d="M0 922L117 907L253 1000H0Z" fill="#102f34"/><path d="M1290 1000L1394 917L1486 928L1600 875V1000Z" fill="#0b282f"/>
+</svg>
