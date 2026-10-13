@@ -56,7 +56,7 @@ X can change its page structure and video responses, so compatibility requires o
 ```sh
 npm run check    # Formatting, build, and automated tests
 npm run format   # Format source, tests, scripts, and documentation
-npm run package  # Build download and Chrome Web Store ZIPs
+npm run package  # Build and produce outputs/x-media-viewer.zip
 ```
 
 - `src/` contains the extension source, manifest, markup, and styles.
@@ -69,4 +69,4 @@ The viewer runs in Chrome’s isolated content-script world. A separate script i
 
 See [privacy](PRIVACY.md) and [contributing](CONTRIBUTING.md). Licensed under the [MIT License](LICENSE).
 
-The store upload is `outputs/x-media-viewer-store.zip`, with its manifest at the archive root. `outputs/x-media-viewer.zip` keeps an enclosing folder for manual installation. Submission text and requirements are in [store preparation](store/SUBMISSION.md).
+X Media Viewer is distributed only from this GitHub repository: load it unpacked from a source build or from the `x-media-viewer` folder inside `outputs/x-media-viewer.zip`. It is not on the Chrome Web Store.
